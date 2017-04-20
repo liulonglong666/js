@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>日历</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+       .box{
+       	background: #EAE9E9;
+       	width: 240px;
+        margin: 0 auto;
+        margin-top: 50px;
+        padding-bottom: 20px;
+       }
+       .box .nav{
+       	overflow: hidden;
+       	width: 210px;
+       	margin: 0 auto;
+       	padding: 20px 0 0 5px;
+       }
+       .box .nav li{
+       	width: 60px;
+       	height: 60px;
+       	background: #424242;
+       	border: 1px solid #fff;
+       	-webkit-box-sizing: border-box;
+       	-moz-box-sizing: border-box;
+       	box-sizing: border-box;
+       	float: left;
+       	margin: 5px;
+       	color: white;
+       	font-size: 20px;
+       	font-weight: bold; 
+       	list-style: none;
+       	text-align: center;
+       	display: block;
+       	padding-top: 5px;
+       }
+       #text {
+       	background: #f1f1f1;
+       	width: 200px;
+       	height: 80px;
+       	margin: 0 auto;
+       	margin-top: 10px;
+       	/*padding-bottom: 20px;*/
+       }
+       .box .nav li.active{
+       	background: #FEFEFE;
+       	color: #E84A7E;
+       }
+	</style>
+</head>
+<body>
+	<div class="box">
+		<ul class="nav">
+			<li class="active">1<br>JAN	</li>
+			<li>2 <br>	FER </li>
+			<li>3<br> MAR</li>
+			<li>4 <br>APR</li>
+			<li>5 <br>MAY</li>
+			<li>6 <br>JUN</li>
+			<li>7 <br>JUL</li>
+			<li>8 <br>AUG</li>
+			<li>9 <br>SEP</li>
+			<li>10 <br>OCT</li>
+			<li>11 <br>NOV</li>
+			<li>12 <br>DEC</li>
+		</ul>
+		<div id="text">
+			
+		</div>
+	</div>
+
+	<script>
+		var lis=document.getElementsByTagName("li");
+		var text=document.getElementById("text");
+		var arr=["一月活动","2月活动","3月活动","4月活动","5月活动","6月活动","7月活动","8月活动","9月活动","10月活动","11月活动","12月活动",];
+		var arr2=["春游踏青活动","野外宿营","洗白白","kongbai","洗嘿嘿","阳光浴","西藏自驾游","哈尔冰","和龙江","海南","青海湖","拉萨","回家",]
+		text.innerHTML="<h2>"+arr[0]+"</h2>"+"<br>"+arr2[0]
+		/*for(var i=0;i<lis.length;i++){
+			lis[i].onmouseover=function(){
+				change(this);
+			}
+		}
+		function change(obj){
+         for(var i=0;i<lis.length;i++){
+        	if(lis[i]==obj){
+        		this.index=i;
+        		lis[i].className="active";
+        		text.innerHTML="   "+"<h2>"+(this.index+1)+"月活动"+"</h2>"+"<br>"+arr2[i];
+        	}
+            	else{
+            		lis[i].className="";
+
+            	}
+            }
+		}*/
+		for(var i=0;i<lis.length;i++){
+			lis[i].index=i;
+			lis[i].onmouseover=function(){
+			for(var j=0;j<lis.length;j++){
+				lis[j].className="";
+			}
+             this.className="active";
+             text.innerHTML="<h2>"+(this.index+1)+"月活动</h2>"+"<br>"+arr2[this.index];
+		}
+	}
+	</script>
+</body>
+</html>

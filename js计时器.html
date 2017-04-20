@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>js计时器</title>
+</head>
+<body>
+	<style>
+    *{
+    	margin: 0;
+    	padding:0;
+    }
+    #box{
+    	width: 100px;
+    	height: 100px;
+    	background: pink;
+    	position: absolute;
+    	left: 50px;
+    	top: 100px;
+    }
+	</style>
+	<div id="box">
+		
+	</div>
+
+	<script>
+		var box=document.getElementById("box");
+		/*var n=100;
+		var time=null;
+		setInterval(function(){
+            n+=10;
+            box.style.width=n+"px";
+		},1000);
+		time=setInterval(move,100);
+		function move(){
+			 n+=10;
+           
+            box.style.top=n+"px";
+            
+		}*/
+		var time1=setTimeout(function(){alert("你好，3秒钟后减")},3000);
+		
+		box.onclick=function(){
+			clearTimeout(time1);
+		}
+
+		//清除计时器
+	</script>
+</body>
+</html>

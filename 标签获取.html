@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>标签获取</title>
+	<style>
+      #box1111{
+      	width: 100px;
+      	height: 100px;
+      	background-color: green;
+      }
+       #box1{
+      	width: 100px;
+      	height: 100px;
+      	background-color: red;
+      }
+	</style>
+</head>
+<body>
+	<div id="box1111" onclick="test()"></div>
+	<div id="box1"></div>
+	<input type="text" id="i">
+	<script>
+		// var box= document.getElementById("box1111");
+		// console.log(box);
+		/*var divs = document.getElementsByTagName("div");
+		console.log(divs);*/
+		/*var x = document.getElementById("i");
+		box.onclick = function(){
+			alert("你好，我是红色");
+		}
+		x.onfocus= function(){
+			alert("How are you");
+		}
+		x.onblur=function(){
+			alert("鼠标离开了输入框");
+		}
+		x.onkeydown= function(){
+			alert("按键被按下");
+		}
+		x.onkeyup=function(){
+			alert("按键被弹起");
+		}*/
+		function test(){
+			alert("绑定成功");
+		}
+
+	</script>
+</body>
+</html>

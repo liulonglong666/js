@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>this指针</title>
+</head>
+<body>
+	<script>
+		/*var name="盲僧";
+		function test(){
+			var name="皇子";
+			alert(this.name);
+		}
+		window.test();*/
+		   var obj={};  
+			var name="白百合";  
+			obj.name="obj";  
+			obj.test=function (){
+				alert("名字是"+this.name)//指向obj对象
+			};  
+			obj.test(); 
+			var test1 = obj.test;
+			test1();//指向window对象
+
+	</script>
+</body>
+</html>

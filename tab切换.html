@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>tab切换</title>
+	<style>
+      *{
+      	margin:0;
+      	padding: 0;
+      }
+      .box{
+      	width: 800px;
+      	height: 350px;
+      	border: 1px solid black;
+      	margin: 100px auto;
+       background: #f7f7f7;
+      }
+      #nav{
+      	/*margin:0 20px;*/
+      	border-top: 1px solid #ccc;
+      	border-bottom: 1px solid #ccc;
+      	height: 50px;
+      	width: 100%;
+      }
+      #nav li{
+      	width: 16%;
+      	height: 50px;
+      	border: 1px solid #ccc;
+      	box-sizing:border-box;
+      	float: left;
+      	text-align: center;
+      	line-height: 50px;
+      	list-style: none;
+      	font-weight: bold;
+
+      }
+       .contener{
+      	height: 300px;
+      	text-align: center;
+      	display: none;
+      	/*line-height: 300px;*/
+
+      }
+      .show{
+      	display: block;
+      }
+      .active{
+      	background: #51AB27;
+      	color: white;
+
+      }
+    .contener .list{
+    	float: left;
+    	/*margin-right: 20px;*/
+        margin-left: 30px;
+        margin-top: 30px;
+    }
+    .contener .list .list-item{
+    	width: 120px;
+    	height: 210px;
+    	position: relative;
+    }
+    .contener .list .list-item img{
+    	width: 100%;
+    	height: 100%;
+    }
+    .contener .list .list-item .bottom{
+    	height: 20px;
+    	position: absolute;
+    	bottom: 0;
+    	left: 0;
+    	right: 0;
+    	background: #000;
+    }
+    .contener .list .list-item .bottom span{
+    	color: white;
+    	float: right;
+    }
+    .contener .list span{
+        font-weight: bold;
+        font-size: 14px;
+        float: left;
+        margin-top: 5px;
+    }
+    .contener .list p{
+    	color: #ccc;
+    	font-size: 14px;
+        line-height: 20px;
+        float: left;
+    }
+    .contener .view{
+    	width: 500px;
+    	height: 300px;
+    	float: left;
+    }
+    .contener .view p{
+    	   font-weight: bold;
+		    /*width: 214px;*/
+		    font-size: 14px;
+		    float: left;
+    }
+    .contener .view span{
+    	margin-left: 20px;
+    	font-weight: normal;
+    }
+	</style>
+</head>
+<body>
+	<div class="box">
+		<ul id="nav">
+			<li class="active">预告片</li>
+			<li>战狼吴京</li>
+			<li>火爆枪战</li>
+			<li>惊悚恐怖片</li>
+			<li>爆笑喜剧</li>
+			<li>猜你喜欢</li>
+		</ul>
+		<div class="contener show">
+          <div class="list">
+	          	<div class="list-item">
+	          		<img src="img/zl.jpg" alt="">
+	          		<div class="bottom">
+	          			<span >7.4分</span>
+	          		</div>
+	          	</div>
+	             <span>战狼</span><br>
+	             <p>痞子兵王全面开挂</p>
+          </div>
+          <div class="list">
+          	<div class="list-item">
+          		<img src="img/sdyjq.jpg" alt="">
+          		<div class="bottom">
+          			<span>8.8分</span>
+          		</div>
+          	</div>
+             <span>速度与激情7</span><br>
+             <p>保罗遗作好评如潮</p>
+          </div>
+          <div class="list">
+          	<div class="list-item">
+          		<img src="img/zmjhb.jpg" alt="">
+          		<div class="bottom">
+          			<span>6.3分</span>
+          		</div>
+          	</div>
+             <span>咱们结婚吧</span><br>
+             <p>大黑牛李晨爱上郭碧婷</p>
+          </div>
+          <div class="list">
+          	<div class="list-item">
+          		<img src="img/cfc.jpg" alt="">
+          		<div class="bottom">
+          			<span>7.1分</span>
+          		</div>
+          	</div>
+             <span>冲锋车</span><br>
+             <p>真悍匪vs假警员</p>
+          </div>
+          <div class="list">
+          	<div class="list-item">
+          		<img src="img/bfy.jpg" alt="">
+          		
+          	</div>
+             <span>暴疯语</span><br>
+             <p>陈明青云困兽之斗</p>
+          </div>
+		</div>
+		<div class="contener">
+           <img src="img/zl.jpg" alt="" style="float: left;">
+           <div class="view" >
+             <p> 片名:
+           	   <span>战狼</span></p><br>
+           	<p>
+           	  导演：
+           	  <span>吴京</span>
+           	 </p><br>
+           	<p>
+                主演：
+           	    <span>吴京</span>
+           	</p><br>
+           	<p>
+           	   剧情简介
+           	  <span>《战狼》是由吴京执导的现代军事战争片，该片由吴京、余男、倪大红、斯科特·阿金斯 、周晓鸥等主演。该影片属于国内首部3D动作战争电影，历时七年全力打造，《战狼》真实呈现了一场中外边境战争，也让堪称“东方之狼”的特种兵战队及高能战士首次登陆大银幕。讲述的是小人物成长为拯救国家和民族命运的孤胆英雄的传奇故事。该影片于2015年4月2日全国上映。2015年06月20日，《战狼》在成龙动作电影周上包揽了最佳动作片、最佳动作男演员、最佳特技、最佳打斗场面设计四项大奖。</span>
+           	</p>
+           	
+           	
+         <input type="button" value="点击按钮表示想看" onclick="aa()"></input>
+         <div id="a">已有0人表示想看</div>
+           </div>
+		</div>
+		<div class="contener">内容3</div>
+		<div class="contener">内容3</div>
+		<div class="contener">内容3</div>
+		<div class="contener">内容3</div>
+	</div>
+	<script>
+		var lis = document.getElementsByTagName("li");
+		console.log(lis);
+	    var divs = document.getElementsByClassName("contener");
+	   /*for(var i=0;i<lis.length;i++){
+			lis[i].onclick=function(){
+				change(this);
+				console.log(i);
+				console.log(this);
+			}
+		}
+		function change(obj){
+			for(var i=0;i<lis.length;i++){
+				if(lis[i]==obj){
+					lis[i].className="active";
+					divs[i].className="contener show";
+				}
+				else{
+					lis[i].className=" ";
+					divs[i].className="contener";
+				}
+			}
+		}*/
+		var lis = document.getElementsByTagName("li");
+		var divs = document.getElementsByClassName("contener");
+		function clear(){
+			
+			for(var i=0;i<lis.length;i++){
+				lis[i].className="";
+				divs[i].className="contener";
+			}
+		}
+      for(var i=0;i<lis.length;i++){
+       lis[i].index=i;
+      	lis[i].onclick=function(){
+           clear();
+      	   this.className="active";
+      	   divs[this.index].className="contener show";
+      			 
+      			
+      	}
+      }
+		
+		function aa(){
+		var x = document.getElementsByTagName("input")[0];
+			var i=1;
+			x.onclick=function(){
+				i++;
+				document.getElementById("a").innerHTML="已有"+i+"人表示十分想看";
+			}
+
+		}
+	</script>
+</body>
+</html>

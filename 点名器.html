@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>点名册</title>
+</head>
+<body>
+   <style>
+    *{
+    	margin: 0;
+    	padding: 0;
+    }
+    #box{
+    	width: 300px;
+    	height: 200px;
+    	background: #acd6FF;
+    	margin: 0 auto;
+    	position: relative;
+    	margin-top: 100px;
+    	text-align: center;
+    	line-height: 200px;
+    	font-weight: bold;
+    	font-style: 24px;
+    }
+    #left{
+       width: 50px;
+    	height: 30px;
+       background: #921aff;
+       position: absolute;
+       bottom: 0;
+       left: 5px;
+    }
+    #right{
+    	width: 50px;
+    	height: 30px;
+    	background: red;
+    	position: absolute;
+    	bottom: 0;
+    	right: 5px;
+    }
+    .bottom{
+    	position: relative;
+    	margin-top: 0;
+    	width: 300px;
+    	height: 30px;
+        margin: 0 auto;
+        background: #ccc;
+    }
+   </style>
+   <div>
+	<div id="box">
+	点击开始进行随机点名
+		<!-- <div id="left">开始</div>
+		<div id="right">停止</div> -->
+		
+	</div>
+	<div class="bottom">
+        <button id="left">开始</button>
+		<button id="right">停止</button>
+   </div>
+  </div> 
+	<script>
+	  var box=document.getElementById('box');
+	  var stop=document.getElementById('right');
+	  var begin=document.getElementById('left');
+		var arr = ["李亚飞","刘震","李如诗","刘龙龙","张梦思","王朋举","陈恒志","黄立洋","闫金科","张梦飞","杨臻","裴俊鹏","舒新霞","李永丽","王飞天","王培杰","叶庚","申远","贾祖粟","崔玉林","张帅丹","刘三山","陈硕","马超","沈胜","周伟林","马傲","宋阳阳","林开山","王贤","刘朋","谢红飞","李魁","潘秋帆"];
+       var time=null;var i=0;
+       function move(){
+       	box.innerHTML=arr[i];
+       	i=parseInt(Math.random()*34);
+       	console.log(i);
+       	if(i>=34){
+       		i=0;
+       	}
+       }
+       
+       begin.onclick=function(){
+       	clearInterval(time);
+       	time=setInterval(move,100);
+       	// setInterval(time,100);
+       }
+       stop.onclick=function(){
+       	clearInterval(time);
+       }
+       /*time=function(){     	
+       	i++;
+       	box.innerHTML="<h2>"+arr[i]+"</h2>";
+       	if(i>=33){
+       		i=0;
+       	}
+       }
+       begin.onclick=function(){
+       	setInterval(time,100);
+       }
+       stop.onclick=function(){
+       	clearTimeout(time);
+       }*/
+	</script>
+</body>
+</html>
