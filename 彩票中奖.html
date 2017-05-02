@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>彩票随机中奖</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+      #box{
+        width: 640px;
+        height: 300px;
+        text-align: center;
+        background: #F9F4EC;
+        margin: 100px auto;
+        padding-left: 30px;
+        position: relative;
+      }
+       #box li{
+       	width: 40px;
+       	height: 40px;
+       	border-radius: 50%;
+       	background: #fff;
+       	list-style: none;
+       	float: left;
+       	margin: 20px 7px;
+       	text-align: center;
+       	line-height: 40px;
+       }
+	  #begin{
+	  	width: 150px;
+	  	height: 40px;
+	  	background: red;
+	  	color: white;
+	  	text-align: center;
+	  	line-height: 40px;
+	  	position: absolute;
+	  	bottom: 20px;
+	  	left: 100px;
+	  	border-radius: 5px;
+	  }
+	  #clear{
+	  	width: 150px;
+	  	height: 40px;
+	  	background: #808080;
+	  	text-align: center;
+	  	line-height: 40px;
+	  	position: absolute;
+	  	bottom: 20px;
+	  	right: 100px;
+	  	border-radius: 5px;
+	  }
+	  #box .active{
+	  	background: red;
+	  	color: black;
+	  }
+	</style>
+</head>
+<body>
+	<div id="box">
+		<ul>
+			<li>01</li>
+			<li>02</li>
+			<li>03</li>
+			<li>04</li>
+			<li>05</li>
+			<li>06</li>
+			<li>07</li>
+			<li>08</li>
+			<li>09</li>
+			<li>10</li>
+			<li>11</li>
+			<li>12</li>
+			<li>13</li>
+			<li>14</li>
+			<li>15</li>
+			<li>16</li>
+			<li>17</li>
+			<li>18</li>
+			<li>19</li>
+			<li>20</li>
+			<li>21</li>
+			<li>22</li>
+			<li>23</li>
+			<li>24</li>
+			<li>25</li>
+			<li>26</li>
+			<li>27</li>
+			<li>28</li>
+			<li>29</li>
+			<li>30</li>
+			<li>31</li>
+			<li>32</li>
+			<li>33</li>
+		</ul>
+      <div id="begin">随机选择红球</div>
+      <div id="clear">重新选择</div>
+	</div>
+</body>
+
+<script>
+	var box=document.getElementById('box');
+	var lis=document.getElementsByTagName('li');
+	var begin=document.getElementById("begin");
+	var clear=document.getElementById("clear");
+	var aa;
+	var time=null;
+	var time1=null;
+	function randomFn(){
+		return Math.floor(Math.random()*34);
+	}
+	function make(){
+		var arr=[];
+	while(arr.length<7){
+		 aa=randomFn();
+		if(arr.indexOf(aa)== -1){
+			arr.push(aa);
+		}
+	 }
+	 return arr;
+	}
+	function makeBall(){
+		var arr=make();
+		for(var i=0;i<lis.length;i++){
+			lis[i].className="";
+		}
+		for(var i=0;i<arr.length;i++){
+			lis[arr[i]-1].className="active";
+		}
+		console.log(arr);
+	}
+	begin.onclick=function(){
+		clearInterval(time);
+		time=setInterval(makeBall,500);
+		time1=setTimeout(function(){
+			clearInterval(time);
+		},2000);
+	}
+	clear.onclick=function(){
+		for(var i=0;i<lis.length;i++){
+			lis[i].className="";
+		}
+	}
+	
+		
+</script>
+</html>

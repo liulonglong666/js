@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+  *{
+  	margin: 0;
+  	padding: 0;
+  }
+     
+     #inner{
+     	width: 50px;
+     	height: 50px;
+     	background: pink;
+     	border: 25px solid green;
+     	 position: absolute;
+     	left: 100px;
+     	top: 50px;    	
+     }
+     #stop{
+     	width: 20px;
+     	height: 20px;
+     	background: #ccc;
+        position: absolute;
+        top: 0;
+        right: 0;
+        /*position: relative;*/
+     }
+     .active{
+     	display: none;
+     }
+	</style>
+</head>
+<body>
+	
+		<div id="inner" >
+		   <div id="stop" ></div>
+
+		 </div>
+		
+	
+
+	<script>
+	var winHeight = document.documentElement.clientHeight;
+		var winWeidth=document.documentElement.clientWidth;
+		var inner=document.getElementById('inner');
+		var stop=document.getElementById('stop');
+		var maxY=winHeight-inner.offsetHeight;
+		var maxX=winWeidth-inner.offsetWidth;
+		//监听浏览器窗口发生变化的函数
+		window.onresize=function(){
+	    winHeight = document.documentElement.clientHeight;
+	    winWeidth=document.documentElement.clientWidth;
+	     maxY=winHeight-inner.offsetHeight;
+		 maxX=winWeidth-inner.offsetWidth;
+		}
+		var speedY=2;
+	    var speedX=2;
+	    var time=null;
+		function move(){
+			
+			var x=inner.offsetLeft+speedX;
+			var y = inner.offsetTop+speedY;
+			if(y>=maxY){
+                 speedY *= -1;
+			}
+			if(y<=0){
+				// x=100;
+				speedY *= -1;
+			}
+			if(x>=maxX){
+				x=maxX;
+                 speedX *= -1;
+			}
+			if(x<=0){
+				x=0;
+				 speedX *= -1;
+			}
+			inner.style.left=x+'px';
+			inner.style.top=y+'px';
+			console.log(inner.style.left);
+			
+			
+		}
+		time=setInterval(move,20);
+        inner.onmouseover=function(){
+        	clearInterval(time);
+        }
+        inner.onmouseout=function(){
+        	time=setInterval(move,20);
+        }
+        stop.onclick=function(){
+        	inner.className="active";
+        	clearInterval(time);
+        }
+	</script>
+</body>
+</html>

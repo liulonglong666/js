@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>二级联动</title>
+</head>
+<body>
+	<select name="" id="pro" onchange="move()">
+		<option value="choose" selected>请选择</option>
+		<option value="河南">河南</option>
+		<option value="河北">河北</option>
+	</select>
+	<select name="" id="city">
+		<option value=""></option>
+	</select>
+
+	<script>
+		function move(){
+			var pro=document.getElementById('pro');
+			var city=document.getElementById('city');
+			var add;
+			if(pro.value=='河南'){
+                add=new Array('郑州','濮阳','许昌');
+			}
+			else if(pro.value=='河北'){
+				add=new Array('天津','秦皇岛','唐山');
+			}
+			else if(pro.value=='choose'){
+				add=new Array("请选择");
+			}
+			else{
+				add= null;
+			}
+			console.log(add);
+			city.length=0;
+			for(var i=0;i<add.length;i++){
+				var city_list;
+				city_list=new Option();
+				city_list.text=add[i];
+				city.add(city_list);
+			}
+		}
+		// move();
+	</script>
+</body>
+</html>

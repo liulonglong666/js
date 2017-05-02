@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>字符串</title>
+</head>
+<body>
+	<script>
+		/*var number=123;
+		var a=number.toString();
+		//toString()方法将其他类型的变量转换为字符串类型；
+		console.log(typeof a);
+		var b=String(number);
+		console.log(typeof b);
+        var c='';
+        var d="";
+        console.log(typeof c);
+        console.log(typeof d);
+        //单引号和双引号都可以用来创建字符串
+        var str=new String("hello world");
+        console.log(typeof str);
+        console.log(str[8]);
+
+        //concat()可以将字符串合并
+        var str1="hello";
+        var str2=",world";
+        var str3=str1.concat(str2);
+        console.log(str3);*/
+        /*var str1="hello,world";
+        console.log(str1.indexOf("l"));
+        //inedxOf()返回字符串中一个子串第一处出现的索引值（从左到右搜索）如果没有匹配项，则返回-1；n表示从n处开始查找
+        console.log(str1.indexOf("l",4));
+        console.log(str1.charAt(1));
+        console.log(str1.lastIndexOf("l",4));*/
+     /*   var str="hello ,world!!!";
+        console.log(str.substring(3));
+        console.log(str.substring(3,8));
+*/
+        //substring(start,end)返回字符串的一个子串，传入参数是起始位置(包含起始位置)和结束位置(不包含结束位置)。
+        /* console.log(str.substr(1));
+         console.log(str.substr(1,4));
+         var str1=str.slice(1);
+         var str2=str.slice(1,4);
+         console.log(str1);
+         console.log(str2);
+
+         var arr=str.split("");
+         console.log(arr);
+         var arr2=str.split(" ");
+         console.log(arr2);*/
+
+        /* var str="HELLO ,woldf!";
+         console.log(str.toUpperCase());
+         var str2=window.navigator.userAgent;
+         console.log(str2);
+         if(str2.indexOf("Chrome")!= -1){
+         	alert("你的浏览器是谷歌浏览器");
+         }
+         else{
+         	alert("谁知道你用的是什么鬼浏览器");
+         }*/
+         var str="This is a world of programmers."
+          console.log(str.length);
+          console.log(str.split(" "));
+          console.log(str.slice(19));
+          console.log(str.substring(19));
+          console.log(str.substr(19));
+          console.log(str.toLowerCase());
+          console.log(str.toUpperCase());
+          console.log(str.indexOf("hello"));
+          console.log(str.indexOf("world"));
+
+          /*var arr=str.split("");
+          console.log(arr);
+          var arr3=new Array();
+          for(var i=0;i<arr.length;i++){
+          	if(arr3[i].indexOf("s")){
+                 
+          	}
+
+          }*/
+         /* var arr=[];
+          for(var i=0;i<str.length;i++){
+          	if(str.indexOf("s",i)!=-1){
+          		arr.push(str.indexOf("s",i));
+          		i=str.indexOf("s",i);
+
+          	}
+          }
+          console.log(arr);
+          console.log(Math.PI);*/
+          var arr=[];
+          for(var i=0;i<=10;i++){
+             arr[i]=parseInt(Math.random()*10)
+          }
+          console.log(arr);
+           console.log(Math.max(arr[0],arr[1],arr[2],arr[3]));
+          /*var a=2.88;
+          console.log(Math.round(a));*/
+	</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+var json1={"name":"小强","age":"20","sex":"男"};
+		//访问json中的属性
+		/*console.log(json1);
+		json1.showName();
+		console.log(json1.jsonArr);*/
+		//eval函数可用来将json格式的字符串转化为对象
+		/*var json2=eval("("+json1+")");
+		console.log(json2);
+		// console.log(json2.showName());
+       //JSON.parse()方法可用于将json格式的字符串转化为对象
+		var json3=JSON.parse(json1);
+		console.log(json3);*/
+		/*var str=JSON.stringify(json1);
+		console.log(typeof str);*/
+        for(var i in json1){
+        	console.log(json1[i]);
+        	
+        }
+        for(var i in json1){
+        	console.log(i);
+        }
+		/*var obj1={
+			name:"老王",
+			age:"30",
+			sex:"nan",
+			showName:function(){
+			  alert(this.name);
+			}
+		}
+		console.log(obj1.name);
+		obj1.showName();*/
+	</script>
+</body>
+</html>

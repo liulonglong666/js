@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div class="box">
+		<button id="all">全选</button>
+		<button id="none">反选</button>
+		<input type="checkbox" name="dis-inp" id="dis-inp" disabled="disabled" value="" />
+
+		<ul id="nav">
+			<li><input type="checkbox" class="inp"></li>
+			<li><input type="checkbox" class="inp"></li>
+			<li><input type="checkbox" class="inp"></li>
+			<li><input type="checkbox" class="inp"></li>
+			<li><input type="checkbox" class="inp"></li>
+			<li><input type="checkbox" class="inp"></li>
+			<li><input type="checkbox" class="inp"></li>
+			<li><input type="checkbox" class="inp"></li>
+			<li><input type="checkbox" class="inp"></li>
+			<li><input type="checkbox" class="inp" ></li>
+		</ul>
+	</div>
+</body>
+<script>
+	var al=document.getElementById('all');
+	var non=document.getElementById("none");
+var disinp=document.getElementById('dis-inp');
+    var nav=document.getElementById('nav');
+	var lis=nav.getElementsByTagName('input');
+	
+	al.onclick=function(){
+		for(var i=0;i<lis.length;i++){
+		lis[i].checked=true;
+	  }
+	  move();
+	}
+	non.onclick=function(){
+       for(var i=0;i<lis.length;i++){
+       	this.index=i;
+       if(lis[this.index].checked){
+       	 	lis[i].checked=false;	
+       	 }
+         else {
+       	 	lis[i].checked=true;
+       	 	
+       	 }
+       }
+       move();
+	}
+	function move(){
+		for(var j=0;j<lis.length;j++){
+			if(!lis[j].checked){
+				break;
+			}//如果上面的for循环执行到最后都没有被终止，说明未找到未被选中的复选框（以被全部选中），此时j应为lis.length;
+		}
+		if(j==lis.length){
+           disinp.checked=true;
+		}
+		else{
+          disinp.checked=false;
+		}
+	}
+	//给ul中每一个复选框绑定事件
+	for(var i=0;i<lis.length;i++){
+		lis[i].onchange =function(){
+			move();
+		}
+	}
+	
+</script>
+</html>

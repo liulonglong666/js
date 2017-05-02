@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>滚动</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+      #box{
+      	width: 500px;
+      	height: 600px;
+        margin: 100px auto;
+        position: relative;
+        overflow: hidden;
+      }
+      .inner{
+      	width: 5000px;
+      	height: 600px;
+      }
+      .inner img{
+      	width: 500px;
+      	height: 600px;
+      	float: left;
+      }
+      .spans{
+      	position: absolute;
+      	bottom: 50px;
+      	left: 100px;
+      	margin: 0 auto;
+      	
+      	overflow: hidden;    	
+      }
+      .spans span{
+      	width: 40px;
+      	height: 40px; 
+      	background: #fff;
+      	border-radius: 50%;
+      	color: #000;
+      	float: left;
+        text-align: center;
+        line-height: 40px;
+        margin: 0 10px;
+      }
+       #box .active2{
+      	background: red;
+      	color: white;
+      }
+      #l,#r{
+      	width: 40px;
+      	height: 100%;
+      	text-align: center;
+      	line-height: 600px;     	
+      	background: #362820;
+      	opacity: 0.5;
+      	color: white;
+      	font-size: 30px;
+      	display: none;
+      }
+      #l{
+      	position:absolute;
+      	top: 0;
+      	left: 0;
+      }
+      #r{
+      	position:absolute;
+      	top: 0;
+      	right: 0;
+      }
+      #box .active{
+      	display: block;
+      }
+	</style>
+</head>
+<body>
+	<div id="box">
+		<div class="inner">
+			<img src="img/bfy.jpg" alt="" >
+			<img src="img/cfc.jpg" alt="">
+			<img src="img/sdyjq.jpg" alt="">
+			<img src="img/zl.jpg" alt="">
+			<img src="img/zmjhb.jpg" alt="">
+			<img src="img/bfy.jpg" alt="" >
+			<img src="img/cfc.jpg" alt="">
+			<img src="img/sdyjq.jpg" alt="">
+			<img src="img/zl.jpg" alt="">
+			<img src="img/zmjhb.jpg" alt="">
+		</div>
+			<div class="spans">
+				<span>1</span>
+				<span>2</span>
+				<span>3</span>
+				<span>4</span>
+				<span>5</span>
+			</div>
+			<div id="l">
+				&lt;
+			</div>
+			<div id="r">
+				&gt;
+			</div>
+				
+	</div>
+	<script>
+		var box=document.getElementById('box');
+		var inner=document.getElementById('inner');
+		var imgs = document.getElementsByTagName('img');
+        var spans= document.getElementsByTagName('span');
+        var l=document.getElementById('l');
+        var r=document.getElementById('r');
+        spans.scrollLeft=2500;
+        function move(){
+			box.scrollLeft+=5;
+			
+			if(box.scrollLeft>=2500){
+				box.scrollLeft=0;
+			}
+			spans.scrollLeft-=5;
+			if(spans.scrollLeft<=0){
+				spans.scrollLeft=2500;
+			}
+		}
+		// var time=setInterval(move,10);
+        box.onmouseover=function(){
+          l.className="active";
+          r.className="active";
+          clearInterval(time); 
+       }
+       box.onmouseout=function(){
+       	 l.className="";
+       	 r.className="";
+       	 time=setInterval(move,10);
+       }
+        for(var i=0;i<spans.length;i++){
+       	  spans[i].index=i;
+       	  spans[i].onmouseover=function(){
+       	  	for(var j=0;j<spans.length;j++){
+       	  		spans[j].className=" ";
+       	  		imgs[j].className=" ";
+       	  	}
+       	  	this.className="active2";
+       	  	imgs[this.index].className="active";
+       	  	
+       	  }
+       }
+       spans.style.left=500+"px";
+       console.log(spans.style.left);
+
+		
+	</script>
+</body>
+</html>

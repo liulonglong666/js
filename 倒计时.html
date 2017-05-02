@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div>
+		<span id="td">00天</span>
+		<span id="th">00时</span>
+		<span id="tm">00分</span>
+		<span id="ts">00秒</span>
+	</div>
+ 
+
+	<script>
+		var td=document.getElementById('td');
+		var th=document.getElementById('th');
+		var tm=document.getElementById('tm');
+		var ts=document.getElementById('ts');
+
+		function time(){
+			var EndTime=new Date('2017/04/28 00:00:00');
+			var NowTime=new Date();
+			/*console.log(NowTime);
+			console.log(EndTime);*/
+
+			var t=EndTime.getTime()-NowTime.getTime();
+			console.log(t);
+			var d=0;
+			var h=0;
+			var m=0;
+			var s=0;
+			if(t>=0){
+				// d=parseInt(t/1000/60/60/24);
+				// h=parseInt(t/1000/60/60%24);
+				// m=parseInt(t/1000/60%60);
+				// s=parseInt(t/1000%60);
+				d=EndTime.getDate()-  NowTime.getDate();
+				h=EndTime.getHours()-NowTime.getHours();
+				m=EndTime.getMinutes()-NowTime.getMinutes();
+				s=EndTime.getSeconds()-NowTime.getSeconds();
+				td.innerHTML=d+"天";
+				th.innerHTML=h+"时";
+				tm.innerHTML=m+"分";
+				ts.innerHTML=s+"秒";
+				console.log(d);
+			}
+		}
+		setInterval(time,1000);
+
+	</script>
+</body>
+</html>

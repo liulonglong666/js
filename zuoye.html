@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>综合</title>
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+      #box{
+      	width: 500px;
+      	height: 600px;
+        margin: 100px auto;
+        position: relative;
+        overflow: hidden;
+      }
+      .inner{
+      	height: 600px;
+      	position: absolute;
+      	top: 0;
+      	left: 0;
+      	
+      	transition: all 0.5s;
+      }
+      .inner img{
+      	width: 500px;
+      	height: 600px;
+      	float: left;
+      }
+      .spans{
+      	width: 100%;
+      	position: absolute;
+      	bottom: 20px;
+      	left: 0px;
+      	margin: 10px 100px;   	
+      }
+      .spans span{
+      	display: inline-block;
+      	width: 40px;
+      	height: 40px; 
+      	background: #fff;
+      	border-radius: 50%;
+      	color: #000;
+      	float: left;
+        text-align: center;
+        line-height: 40px;
+        margin: 0 10px;
+      }
+       #box .active{
+      	background: red;
+      	color: white;
+      	transition: 0.3s;
+      }
+      #l,#r{
+      	width: 40px;
+      	height: 100%;
+      	text-align: center;
+      	line-height: 600px;     	
+      	background: #362820;
+      	opacity: 0;
+      	color: white;
+      	font-size: 30px;
+      }
+      #l{
+      	position: absolute;
+      	top: 0;
+      	left: 0;
+      }
+      #r{
+      	position: absolute;
+      	top: 0;
+      	right: 0;
+      }
+	</style>
+</head>
+<body >
+	<div id="box">
+		<div class="inner">
+			<img src="img/bfy.jpg" alt="" class="active">
+			<img src="img/cfc.jpg" alt="">
+			<img src="img/sdyjq.jpg" alt="">
+			<img src="img/zl.jpg" alt="">
+			<img src="img/zmjhb.jpg" alt="">
+		</div>
+			<div class="spans">
+				<span>1</span>
+				<span>2</span>
+				<span>3</span>
+				<span>4</span>
+				<span>5</span>
+			</div>
+			<div id="l">
+				&lt;
+			</div>
+			<div id="r">
+				&gt;
+			</div>
+				
+	</div>
+	<script>
+		var box=document.getElementById('box');
+   var inner = document.getElementsByClassName('inner');
+     console.log(inner);
+        var imgs = document.getElementsByTagName('img');
+        var spans= document.getElementsByTagName('span');
+        var l=document.getElementById('l');
+        var r=document.getElementById('r');
+        console.log(inner);
+        var pieceWidth=imgs[0].offsetWidth;	
+        console.log(pieceWidth); 
+        console.log(imgs);  
+  inner[0].style.width = pieceWidth * imgs.length+"px";
+  console.log(inner[0].style.width);
+        var time=null;
+       var index=0;//定义一个全局变量
+       function next(){
+        index++;
+        tab();
+     }  
+     function prev(){
+      index--;
+      tab();
+     }
+     //图片自动切换
+       time =setInterval(next,2000);
+       
+       function tab(){
+        if(index>imgs.length){
+          index=0;
+        }
+        if(index<0){
+          index=imgs.length-1;
+        }
+        inner[0].style.left=-pieceWidth*index+"px";
+       for(var i=0;i<spans.length;i++){
+        spans[i].className=" ";
+       
+        if(i == index){
+        spans[i].className="active";
+       }
+     }
+  }    //给所有的按钮绑定事件
+      for(var i=0;i<spans.length;i++){
+        spans[i].index=i;
+        spans[i].onclick=function(){
+          clearInterval(time);
+          index=this.index;
+          tab();
+          time=setInterval(next,2000);
+        }
+      }
+      //点击下一个事件
+      r.onclick=function(){
+        clearInterval(time);
+        next();
+        time=setInterval(next,2000);
+      }
+      //点击上一个事件
+      l.onclick=function(){
+        clearInterval(time);
+        prev();
+        time=setInterval(next,2000);
+      }
+
+
+
+
+
+
+
+
+
+       box.onmouseover=function(){
+          l.style.opacity=0.5;
+          r.style.opacity=0.5;
+       }
+       box.onmouseout=function(){
+       	 l.style.opacity=0;
+       	 r.style.opacity=0;
+       }
+
+   
+       
+      
+
+
+	</script>
+</body>
+</html>

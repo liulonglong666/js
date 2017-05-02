@@ -46,7 +46,27 @@
         margin: 0 auto;
         background: #ccc;
     }
+    a{
+      text-decoration: none;
+      float: left;
+      display: block;
+      margin-left: 100px;
+    }
+    a:hover{
+      color: red;
+
+    }
+    #last-name{
+      width: 300px;
+       height: 200px; 
+    }
    </style>
+   <a href="js计时器.html">js计时器.html</a><br>
+   <a href="tab切换.html">tab切换.html</a><br>
+   <a href="tab切换实例.html">tab切换实例.html</a><br>
+    <a href="this指针.html">this指针.html</a><br>
+    <a href="数组.html">数组.html</a><br>
+    <a href="日历.html">日历.html</a><br>
    <div>
 	<div id="box">
 	点击开始进行随机点名
@@ -58,28 +78,29 @@
         <button id="left">开始</button>
 		<button id="right">停止</button>
    </div>
+   <div id="last-name"></div>
   </div> 
 	<script>
 	  var box=document.getElementById('box');
 	  var stop=document.getElementById('right');
 	  var begin=document.getElementById('left');
+     var last=document.getElementById('last-name');
 		var arr = ["李亚飞","刘震","李如诗","刘龙龙","张梦思","王朋举","陈恒志","黄立洋","闫金科","张梦飞","杨臻","裴俊鹏","舒新霞","李永丽","王飞天","王培杰","叶庚","申远","贾祖粟","崔玉林","张帅丹","刘三山","陈硕","马超","沈胜","周伟林","马傲","宋阳阳","林开山","王贤","刘朋","谢红飞","李魁","潘秋帆"];
        var time=null;var i=0;
+
        function move(){
+        i=parseInt(Math.random()*arr.length);
        	box.innerHTML=arr[i];
-       	i=parseInt(Math.random()*34);
-       	console.log(i);
-       	if(i>=34){
-       		i=0;
-       	}
        }
        
        begin.onclick=function(){
        	clearInterval(time);
        	time=setInterval(move,100);
+        begin=document.getElementById('right');
        	// setInterval(time,100);
        }
        stop.onclick=function(){
+        stop=document.getElementById('left');
        	clearInterval(time);
        }
        /*time=function(){     	

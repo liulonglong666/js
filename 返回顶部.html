@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>返回顶部</title>
+	<style>
+     *{
+     	margin: 0;
+     	padding: 0;
+     }
+     body{
+     	height: 2000px;
+     }
+     #box{
+     	width: 80px;
+     	height: 80px;
+     	background: #31b0d5;
+     	text-align: center;
+     	line-height: 80px;
+     	border-radius: 50%;
+     	position:fixed;
+     	right: 30px;
+     	bottom: 50px;
+     	opacity: 0;
+     	display: none;
+     	transition: all 1s;
+     }
+     #top{
+     	width: 80%;
+     	height: 30px;
+     	margin: 0 auto;
+     	text-align: center;;
+     	line-height: 30px;
+     	background: #31b0d5;
+     	position: fixed;
+     	top: 0;
+     	left: 0;
+     	right: 0;
+     	color: white;
+     	display: none;
+     }
+	</style>
+</head>
+<body>
+    <div id="top">
+    	我是头部
+    </div>
+	<div id="box">
+		返回顶部
+	</div>
+</body>
+<script src="js/tween.js"></script>
+<script>
+	var box=document.getElementById('box');
+	var gotop=0;
+	var time=null;
+	var to=document.getElementById('top');
+	//当浏览器发生滚动时，触发事件
+	window.onscroll=function(){
+         gotop=document.documentElement.scollTop||document.body.scrollTop;
+         console.log(gotop);
+         if(gotop>=300){
+         	box.style.display='block';
+            box.style.opacity=1;
+            to.style.display='block';
+       }
+       else{
+       	box.style.display='none';
+        box.style.opacity=0;
+        to.style.display='none';
+       }
+	}
+	
+
+	box.onclick=function(){
+		/*gotop=0;
+		document.documentElement.scollTop=gotop;
+		document.body.scrollTop=gotop;
+		console.log(gotop);*/
+		/*time=setInterval(function(){
+			gotop-=100;
+			if(gotop<=0){//当滚动到顶部时，停止计时器
+				gotop=0;
+			clearInterval(time);
+		   }
+
+			document.documentElement.scollTop=gotop;
+		    document.body.scrollTop=gotop;
+		},100)*/
+		   var t=0;//起始
+			var maxt=100; //
+			var start=document.documentElement.scollTop||document.body.scrollTop;
+			var end=0;
+			var change=end-start;
+		time=setInterval(function(){		
+			t++;
+			if(t>maxt){
+				clearInterval(time);
+			}
+			document.documentElement.scrollTop=Tween.Bounce.easeOut(t,start,change,maxt);
+			document.body.scrollTop=Tween.Bounce.easeOut(t,start,change,maxt);
+		},100)
+		
+	}
+</script>
+</html>

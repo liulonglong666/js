@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+  *{
+  	margin: 0;
+  	padding: 0;
+  }
+     #outer{
+     	width: 1000px;
+     	height: 500px;
+     	margin: 100px auto;
+     	border: 1px solid red;
+     	position: relative;
+     }
+     #inner{
+     	width: 50px;
+     	height: 50px;
+     	background: pink;
+     	border: 25px solid green;
+     	 position: absolute;
+     	left: 100px;
+     	top: 50px;    	
+     }
+     #stop{
+     	width: 20px;
+     	height: 20px;
+     	background: #ccc;
+        position: absolute;
+        top: 0;
+        right: 0;
+     }
+     .active{
+     	display: none;
+     }
+	</style>
+</head>
+<body>
+	<div id="outer">
+		<div id="inner" >
+		   <div id="stop" ></div>
+
+		 </div>
+		
+	</div>
+
+	<script>
+		var outer = document.getElementById('outer');
+		var inner=document.getElementById('inner');
+		var stop=document.getElementById('stop');
+		var maxY=outer.clientHeight-inner.offsetHeight;
+		var maxX=outer.clientWidth-inner.offsetWidth;
+		
+		var speedY=2;
+	    var speedX=2;
+	    var time=null;
+		function move(){
+			
+			var x=inner.offsetLeft+speedX;
+			var y = inner.offsetTop+speedY;
+			if(y>=maxY){
+                 speedY *= -1;
+			}
+			if(y<=0){
+				// x=100;
+				speedY *= -1;
+			}
+			if(x>=maxX){
+				x=maxX;
+                 speedX *= -1;
+			}
+			if(x<=0){
+				x=0;
+				 speedX *= -1;
+			}
+			inner.style.left=x+'px';
+			inner.style.top=y+'px';
+			console.log(inner.style.left);
+			
+			
+		}
+		time=setInterval(move,20);
+        inner.onmouseover=function(){
+        	clearInterval(time);
+        }
+        inner.onmouseout=function(){
+        	time=setInterval(move,20);
+        }
+        stop.onclick=function(){
+        	inner.className="active";
+        	clearInterval(time);
+        }
+	</script>
+</body>
+</html>

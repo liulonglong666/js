@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+	   *{
+	   	margin: 0;
+	   	padding: 0;
+	   }
+	   #outer{
+	   	width: 700px;
+	   	height: 500px;
+	   	margin: 100px auto;
+	   	overflow: hidden;
+	   	position: relative;
+	   }
+	   #inner{
+	   	height: 500px;
+	   	position: absolute;
+	   	left: 0;
+	   	top:0;
+	   }
+	   #inner img{
+	   	float: left;
+	   	width: 700px;
+	   	height: 500px;
+	   }
+      #btn-box{
+      	width: 100%;
+      	position: absolute;
+      	bottom: 10px;
+      	left: 0;
+      	text-align: center;
+      }
+      #btn-box span{
+      	display: inline-block;
+      	width: 40px;
+      	height: 40px;
+      	background: #fff;
+      	border-radius: 50%;
+      	color: black;
+      	line-height: 40px;
+      	text-align: center;
+        font-size: 20px;
+      }
+      #btn-box span.active{
+      	color: #fff;
+      	background: red;
+      }
+      #nextBtn , #prevBtn{
+        height: 100%;
+        width: 50px;
+        background: rgba(0,0,0,0.5);
+        text-align: center;
+        line-height: 500px;
+        color: #fff;
+        font-size: 40px;
+        opacity: 0;
+        transition: all 0.5s;
+      }
+      #nextBtn{
+      	position: absolute;
+      	top: 0;
+      	right: 0;
+      }
+      #prevBtn{
+      	position: absolute;
+      	top: 0;
+      	left: 0;
+      }
+	</style>
+</head>
+<body>
+	<div id="outer">
+		<div id="inner">
+			<img src="img/bfy.jpg" alt="">
+			<img src="img/cfc.jpg" alt="">
+			<img src="img/sdyjq.jpg" alt="">
+			<img src="img/zl.jpg" alt="">
+			<img src="img/zmjhb.jpg" alt="">
+			<img src="img/sdyjq.jpg" alt="">
+			<img src="img/bfy.jpg" alt="">
+		</div>
+		<p id="btn-box">
+			<span class="active">1</span>
+			<span>2</span>
+			<span>3</span>
+			<span>4</span>
+			<span>5</span>
+			<span>6</span>
+		</p>
+        <div id="nextBtn">&gt;</div>
+        <div id="prevBtn">&lt;</div>
+	</div>
+	<div id="gg">
+		
+	</div>
+
+<script src="js/tween.js" charset="UTF-8"></script>
+<script>
+	var outer=document.getElementById('outer');
+		var inner=document.getElementById('inner');
+		var imgs=inner.getElementsByTagName('img');
+		// var Btn=document.getElementById('btn-box');	
+		 var btns=document.getElementsByTagName('span');
+		 var nextBtn=document.getElementById('nextBtn');
+		 var prevBtn=document.getElementById('prevBtn');
+		//根据图片的数量设置inner的宽度
+		var pieceWidth=imgs[0].offsetWidth;	    
+		inner.style.width=pieceWidth*imgs.length+"px";
+       var time=null;
+       var time1=null;//图片滑动时间
+		var index=0;//定义变量从零开始，控制图片的切换，此为全局变量
+		var control=true;
+		//创建切换下一张图片
+		 function next(){
+		 	index++;
+		 	if(index>=imgs.length){
+		 		index=1;
+		 		inner.style.left=0;
+		 	}
+		 	tab();
+		 }
+		 //切换上一张图片
+		 function prev(){
+		 	index--;
+		 	if(index<0){
+		 		index=btns.length-1;
+		 		inner.style.left=-pieceWidth * btns.length+"px";
+		 		
+		 	}
+		 	tab();
+		 }
+		 //创建tab函数，调动时更改inner的left值，实现图片切换
+		 function tab(){
+		 	
+		 	var t=0;  //初始的步数
+		 	var maxT=100;
+		 	var start=inner.offsetLeft;//获取起始位置
+		 	var end=- pieceWidth*index  //计算结束位置
+		 	var change = end-start;
+            clearInterval(time1);
+		 	 time1=setInterval(function(){
+		 	 	t++;
+		 	 	// inner.style.left=change/maxT *t+start+"px";
+		 	 	inner.style.left=Tween.Bounce.easeOut(t,start,change,maxT)+"px";
+		 	 	if(t>=maxT){
+                   clearInterval(time1);
+                   control=true;  
+		 	 	}
+		 	 },20)
+		   inner.style.left= - pieceWidth*index+"px";
+		   //切换按钮
+		   for(var i=0;i<btns.length;i++){
+		   	btns[i].className="";
+		   }
+		   if(index==btns.length){
+		   	//如果图片为最后一张，下标为6，等于btns的长度我们对应的按钮应该显示为第一个按钮
+		   	btns[0].className="active";
+		   }
+		   else{
+		   	btns[index].className="active";
+		   }
+		 }
+		 //设置计时器，反复调用，实现图片自动滚动
+		 time=setInterval(next,3000);
+		 //给每个按钮绑定事件
+		 for(var i=0;i<btns.length;i++){
+		 	btns[i].index=i;
+		 	btns[i].onclick=function(){
+		 		clearInterval(time);
+		 		if(this.index==0 && index==btns.length){
+                   index=imgs.length;
+		 		}
+		 		else{
+		 			index=this.index;
+		 		}
+		 	   
+		 	   index=this.index;
+		 	   tab();
+		 	   time=setInterval(next,3000);
+		 	}
+		 }
+		 //鼠标在图片上停留时，显示出两侧的导航条
+		  outer.onmouseover=function(){
+           nextBtn.style.opacity=1;
+           prevBtn.style.opacity=1;
+       }
+       //鼠标不在图片上时
+       outer.onmouseout=function(){
+       	   nextBtn.style.opacity=0;
+           prevBtn.style.opacity=0;
+          
+       }
+       //图片右侧的按钮点击事件：切换到下一张
+       nextBtn.onclick=function(){
+       	
+       	 if(control){
+	       	clearInterval(time);
+	       	next();
+	       	time = setInterval(next,3000);
+       	}
+       control=false;
+       }
+       //图片左侧的按钮点击事件：切换到上一张
+       prevBtn.onclick=function(){
+       	if(control){
+       	clearInterval(time);
+       	prev();
+       	time=setInterval(next,3000);
+       	}
+       	control=false;
+       }
+</script>
+</body>
+</html>

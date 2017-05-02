@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>大图滚动</title>
+	<style>
+	   *{
+	   	margin: 0;
+	   	padding: 0;
+	   }
+	   #outer{
+	   	width: 700px;
+	   	height: 500px;
+	   	margin: 100px auto;
+	   	overflow: hidden;
+	   	position: relative;
+	   }
+	   #inner{
+	   	height: 500px;
+	   	position: absolute;
+	   	left: 0;
+	   	top:0;
+	   	transition: all 1s;
+	   }
+	   #inner img{
+	   	float: left;
+	   	width: 700px;
+	   	height: 500px;
+	   }
+      #btn-box{
+      	width: 100%;
+      	position: absolute;
+      	bottom: 10px;
+      	left: 0;
+      	text-align: center;
+      }
+      #btn-box span{
+      	display: inline-block;
+      	width: 40px;
+      	height: 40px;
+      	background: #fff;
+      	border-radius: 50%;
+      	color: black;
+      	line-height: 40px;
+      	text-align: center;
+        font-size: 20px;
+      }
+      #btn-box span.active{
+      	color: #fff;
+      	background: red;
+      }
+      #nextBtn , #prevBtn{
+        height: 100%;
+        width: 50px;
+        background: rgba(0,0,0,0.5);
+        text-align: center;
+        line-height: 500px;
+        color: #fff;
+        font-size: 40px;
+        opacity: 0;
+        transition: all 0.5s;
+      }
+      #nextBtn{
+      	position: absolute;
+      	top: 0;
+      	right: 0;
+      }
+      #prevBtn{
+      	position: absolute;
+      	top: 0;
+      	left: 0;
+      }
+	</style>
+</head>
+<body>
+	<div id="outer">
+		<div id="inner">
+			<img src="img/bfy.jpg" alt="">
+			<img src="img/cfc.jpg" alt="">
+			<img src="img/sdyjq.jpg" alt="">
+			<img src="img/zl.jpg" alt="">
+			<img src="img/zmjhb.jpg" alt="">
+			<img src="img/sdyjq.jpg" alt="">
+		</div>
+		<p id="btn-box">
+			<span class="active">1</span>
+			<span>2</span>
+			<span>3</span>
+			<span>4</span>
+			<span>5</span>
+			<span>6</span>
+		</p>
+        <div id="nextBtn">&gt;</div>
+        <div id="prevBtn">&lt;</div>
+	</div>
+
+	<script>
+		var outer=document.getElementById('outer');
+		var inner=document.getElementById('inner');
+		var imgs=inner.getElementsByTagName('img');
+		// var Btn=document.getElementById('btn-box');	
+		 var btns=document.getElementsByTagName('span');
+		 var nextBtn=document.getElementById('nextBtn');
+		 var prevBtn=document.getElementById('prevBtn');
+		//根据图片的数量设置inner的宽度
+		var pieceWidth=imgs[0].offsetWidth;	    
+		inner.style.width=pieceWidth*imgs.length+"px";
+
+		var time=null;
+		var index=0;//定义变量从零开始，控制图片的切换，此为全局变量
+       //定义执行下一张
+        function next(){
+          index++;
+          tab(); 
+        }
+        function prev(){
+        	index--;
+        	tab();
+        }
+        //图片自动切换；
+        time=setInterval(next,2000);
+
+
+//封装
+        function tab(){
+        	if(index>=imgs.length){
+          	   index=0;
+          }
+          if(index<0){
+          	index=imgs.length-1;
+          }
+          inner.style.left= - pieceWidth*index+"px";
+          //遍历所有的span按钮，清除激活的active类名
+          for(var i=0;i<btns.length;i++){
+          	btns[i].className="";
+          	if(i ==index){
+          		btns[i].className="active";
+          	}
+          }
+        }
+        //给所有的按钮绑定事件
+       for(var i=0;i<btns.length;i++){
+       	btns[i].index=i;
+       	btns[i].onclick=function(){
+       		clearInterval(time);
+       		//清除计时器，以免图片展示时间过短；
+       		//将点击的按钮的下标设置为index的值；
+          index=this.index;
+          tab();
+          time=setInterval(next,2000);
+       	}
+       }
+       outer.onmouseover=function(){
+           nextBtn.style.opacity=1;
+           prevBtn.style.opacity=1;
+       }
+       outer.onmouseout=function(){
+       	   nextBtn.style.opacity=0;
+           prevBtn.style.opacity=0;
+       }
+       nextBtn.onclick=function(){
+       	clearInterval(time);
+       	next();
+       	time=setInterval(next,2000);
+       }
+       prevBtn.onclick=function(){
+         clearInterval(time);
+       	 prev();
+          time=setInterval(next,2000); 
+       }
+	</script>
+</body>
+</html>

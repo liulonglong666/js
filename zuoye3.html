@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+      *{
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+/*简单设置最外层属性。值得注意的是这里用到'overflow:hidden'使超出div部分图片隐藏。*/
+.wrap{
+    width: 1000px;
+    height: 550px;
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+}
+///*给".middle"设置定位而且在这用到'transition',使图片在移动时有滚动的效果。*/
+.middle{
+    height: 550px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: all 0.5s;
+}
+/* 在内层div处设置浮动,让所有图片排成一列。*/
+.middle>div{
+    width: 1000px;
+    height: 550px;
+    text-align: center;
+    line-height: 350px;
+    float: left;
+    font-size: 50px;
+}
+.middle>div>img{
+    width:100%;
+}
+ /*由于只是简单的实现一下,这里的方向直接用尖括号代替了,毕竟程序猿都不喜欢麻烦😂。*/
+.page_move{
+    width: 25px;
+    height: 50px;
+    color: white;
+    text-align: center;
+    line-height: 100px;
+    background-color: #000000;
+    opacity: 0.4;
+    position: absolute;
+    top: 150px;
+}
+.pageBtn{
+    position: relative;
+}
+.wrap>input{
+    width: 50px;
+    height: 20px;
+    color: white;
+    background-color: rgba(0,0,0,0.3);
+}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="middle">
+			<div><img src="img/bfy.jpg" alt=""></div>
+			<div><img src="img/cfc.jpg" alt=""></div>
+			<div><img src="img/sdyjq.jpg" alt=""></div>
+			<div><img src="img/zl.jpg" alt=""></div>
+		</div>
+		<div class="move_page" id="next" style="left: 950px"></div>
+		<div class="move_page" id="last" style="left: 0;"></div>
+		<input type="button" class="pageBtn" value="1"/>
+		<input type="button" class="pageBtn" value="2"/>
+		<input type="button" class="pageBtn" value="3"/>
+		<input type="button" class="pageBtn" value="4"/>
+	</div>
+</body>
+	<script>
+var wrapDiv = document.querySelector(".wrap");
+var middleDiv = document.querySelector(".middle")
+var divs = document.querySelectorAll(".middle>div");
+var nextBtn = document.getElementById("next");
+var lastBtn = document.getElementById("last");
+var pageBtn = document.querySelectorAll(".pageBtn");
+// 设置定时器,和页码page
+var page = 0;
+var timer = null;
+// middle 宽
+// 获取到wrap的宽度保存到变量里
+var w = wrapDiv.offsetWidth;
+middleDiv.style.width = w * divs.length + "px";
+// middle移动
+function pageTurn() {
+    middleDiv.style.left = -w * page + "px";
+}
+// 滚动:这里的direction是自己设置的参数,用来判断是向左滚动还是向右滚动
+function scroll(direction) {
+    if (direction == "next") {
+        page++;
+        if (page > divs.length - 1) {
+            page = 0;
+        }
+    } else {
+        page--;
+        if (page < 0) {
+            page = divs.length - 1;
+        }
+    }
+    pageTurn();
+}
+// 利用定时器实现自动滚动
+function autoScroll() {
+    clearInterval(timer)
+    timer = setInterval(function() {
+        scroll("next");},1500)
+}
+nextBtn.onclick = function() {
+    clearInterval(timer);
+    scroll("next");
+}
+nextBtn.onmouseout = function() {
+    autoScroll();
+}
+lastBtn.onclick = function() {
+    clearInterval(timer);
+    scroll();
+}
+lastBtn.onmouseout = function() {
+    autoScroll();
+}
+window.onload = function() {
+    autoScroll();
+}
+wrapDiv.onmouseover = function() {
+    clearInterval(timer);
+}
+wrapDiv.onmouseout = function() {
+    autoScroll();
+}
+// 利用for循环,实现点击页码来切换图片
+for (var i = 0; i < divs.length; i++) {
+    pageBtn[i].index = i;//给input设置一个index属性,将input下标保存起来
+    pageBtn[i].onmouseover = function() {
+        page = this.index;//将input的下标传递给page 
+        pageTurn();
+    }
+    pageBtn[i].onmouseout = function() {
+        autoScroll();
+    }
+}
+	</script>
+
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				height: 2000px;
+			}
+			#box{
+				width: 80px;
+				height: 80px;
+				background: red;
+				color: #fff;
+				text-align: center;
+				line-height: 80px;
+				border-radius: 50%;
+				position: fixed;
+				right: 30px;
+				bottom: 50px;
+				/*opacity: 0;*/
+				/*transition: all 2s;*/
+				/*display: none;*/
+			}
+			#topSearch{
+				position: fixed;
+				top: -80px;
+				left: 0;
+				width: 100%;
+				height: 80px;
+				line-height: 80px;
+				background: pink;
+				text-align: center;
+				overflow: hidden;
+			}
+			#topSearch input{
+				width: 500px;
+				height: 40px;
+				border: 1px solid #ccc;
+				border-radius: 4px;
+				outline: none;
+			}
+			#topSearch button{
+				width: 50px;
+				height: 40px;
+				border:none;
+				outline: none;
+			}
+		</style>
+
+</head>
+<body>
+	<div id="topSearch">
+			<input type="text" /><button>搜索</button>
+	</div>
+	<div id="box">返回顶部</div>
+
+</body>
+
+  <script src="js/tween.js">
+  	
+  </script>
+  <script type="text/javascript">
+			var box = document.getElementById('box');
+			var topSearch = document.getElementById('topSearch');
+			var goTop = 0;
+			var time = null;
+			var time1 = null;
+			function move(endP){
+				clearInterval(time1);
+				var maxT=80;
+					var t=0;
+					var start=topSearch.offsetTop;
+					var end=endP;
+					var change=end-start;
+					time1=setInterval(function(){
+						t++;
+						if(t>=maxT){
+							clearInterval(time1);
+
+						}
+						topSearch.style.top=Tween.Linear(t,start,change,maxT)+"px";
+					},10)
+			}
+			
+			window.onscroll = function(){
+//				当浏览器发生滚动时,不断获取当前滚动条距离浏览器顶部的距离
+				goTop = document.documentElement.scrollTop||document.body.scrollTop;
+//				当浏览器发生滚动时,不断去判断当前的goTop的值
+				if(goTop >= 200){
+//					当距离顶部大于等于200px时让按钮显示
+
+					box.style.display = 'block';
+					move(0);
+					
+				}else{
+					box.style.display = 'none';
+					move(-80);
+					
+				}
+				
+			}
+			box.onclick = function(){
+				var t = 0;
+				var maxT = 100;
+				var start = goTop;
+				var end = 0;
+				var change = end - start;
+				
+				time = setInterval(function(){
+					t++;
+					if(t >= maxT){
+						clearInterval(time);
+					}
+					document.documentElement.scrollTop = Tween.Bounce.easeOut(t,start,change,maxT);
+					document.body.scrollTop = Tween.Bounce.easeOut(t,start,change,maxT);
+				},10);
+			}
+		</script>
+
+</html>
